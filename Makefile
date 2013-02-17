@@ -1,7 +1,7 @@
 all: clean-pyc test
 
 test:
-	python setup.py test
+	python setup.py nosetests --tests tests/runtests.py
 
 travis:
 	python setup.py nosetests --tests tests/runtests.py

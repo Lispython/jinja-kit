@@ -20,7 +20,7 @@ try:
 except:
     has_subprocess = False
 
-from setuptools import Command, setup
+from setuptools import setup, find_packages
 
 try:
     readme_content = open(os.path.join(os.path.abspath(
@@ -29,45 +29,7 @@ except Exception, e:
     print(e)
     readme_content = __doc__
 
-VERSION = "0.0.3"
-
-
-class run_audit(Command):
-    """Audits source code using PyFlakes for following issues:
-        - Names which are used but not defined or used before they are defined.
-        - Names which are redefined without having been used.
-    """
-    description = "Audit source code with PyFlakes"
-    user_options = []
-
-    def initialize_options(self):
-        all = None
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        try:
-            import pyflakes.scripts.pyflakes as flakes
-        except ImportError:
-            print "Audit requires PyFlakes installed in your system."""
-            sys.exit(-1)
-
-        dirs = ['jinja_kit']
-        # Add example directories
-        for dir in []:
-            dirs.append(os.path.join('examples', dir))
-        # TODO: Add test subdirectories
-        warns = 0
-        for dir in dirs:
-            for filename in os.listdir(dir):
-                if filename.endswith('.py') and filename != '__init__.py':
-                    warns += flakes.checkPath(os.path.join(dir, filename))
-        if warns > 0:
-            print ("Audit finished with total %d warnings." % warns)
-        else:
-            print ("No problems found in sourcecode.")
-
+VERSION = "0.0.5"
 
 def run_tests():
     from tests.run_tests import suite
@@ -89,6 +51,7 @@ tests_require = [
 install_requires = [
     "Jinja2==2.6"]
 
+
 setup(
     name="jinja_kit",
     version=VERSION,
@@ -99,7 +62,7 @@ setup(
     maintainer="Alexandr Lispython",
     maintainer_email="alex@obout.ru",
     url="https://github.com/lispython/jinja-kit",
-    packages=["jinja_kit"],
+    packages=find_packages(exclude=("tests",)),
     install_requires=install_requires,
     tests_require=tests_require,
     license="BSD",
@@ -116,6 +79,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Text Processing :: Markup :: HTML"
         ],
-    cmdclass={'audit': run_audit},
     test_suite = 'tests.runtests.suite'
     )
