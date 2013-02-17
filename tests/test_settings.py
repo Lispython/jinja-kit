@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'jinja_kit.contrib.django'
     ]
 
+JINJA_FILTERS = []
+JINJA_GLOBALS = []
+
 ROOT_URLCONF='urls',
 DEBUG=True,
 DATE_INPUT_FORMATS=('%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', '%b %d %Y',

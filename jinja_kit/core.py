@@ -67,23 +67,22 @@ class Kit(object):
         self.env.globals.update({name or func.func_name: func})
         return func
 
-    def load_filters(self, filter, name=None):
+    def load_filters(self, paths=None):
         """Load filter to environment
-
-        :param filter: :func:filter function
-        :param name: filter template name
         """
         result = {}
-        for m in self.filters:
+        paths = paths or self.filters
+        for m in paths:
             f = __import__(m, fromlist=['filters'])
             result.update(f.filters)
         return result
 
-    def load_globals(self, glob, name=None, key='globals'):
+    def load_globals(self, paths=None, key='globals'):
         """Load global function to environment
         """
         result = {}
-        for m in self.globals:
+        paths = paths or self.globals
+        for m in paths:
             f = __import__(m, fromlist=[key])
             result.update(f.globals)
             for name, func in f.globals.iteritems():
