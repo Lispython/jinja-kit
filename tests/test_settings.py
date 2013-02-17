@@ -43,4 +43,4 @@ DATE_INPUT_FORMATS=('%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', '%b %d %Y',
                     '%B %d, %Y', '%d %B %Y', '%d %B, %Y'),
 SITE_ID=1
 
-TEMPLATES_DIRS = [TEMPLATES_DIR]
+TEMPLATE_DIRS = [TEMPLATES_DIR]

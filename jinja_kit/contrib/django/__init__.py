@@ -19,7 +19,7 @@ class DjangoKit(Kit):
     def __init__(self, settings, loader=FileSystemLoader):
         self.settings = settings
 
-        self.search_path = getattr(settings, 'TEMPLATES_DIRS', list())
+        self.search_path = getattr(settings, 'TEMPLATE_DIRS', list())
         self.loader = import_string(getattr(settings, 'TEMPLATE_LOADER', 'jinja2.FileSystemLoader'))
 
         self.env = Environment(loader=self.loader(self.search_path),
@@ -32,6 +32,12 @@ class DjangoKit(Kit):
         """
         return get_standard_processors()
 
+    def render_to_string(self, template_name, context=None, request=None,
+                         processors=None):
+        return super(DjangoKit, self).render_to_string(
+            template_name, context=context, processors=processors,
+            processor_arg=request)
+
     def render_to_response(self, template_name, context=None, request=None,
                            processors=None, mimetype=None,
                            response_class=HttpResponse):
@@ -40,7 +46,8 @@ class DjangoKit(Kit):
         if 'request' not in context:
             context['request'] = request
         return response_class(self.render_to_string(
-            template_name, context, processors, processor_arg=request),
+            template_name, context=context,
+            processors=processors, request=request),
                               mimetype=mimetype)
 
 

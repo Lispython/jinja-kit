@@ -31,7 +31,7 @@ from .django_test import DjangoTestCase
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(CoreTestCase))
-    #suite.addTest(unittest.makeSuite(DjangoTestCase))
+    suite.addTest(unittest.makeSuite(DjangoTestCase))
     return suite
 
 

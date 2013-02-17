@@ -58,5 +58,3 @@ globals = {
     "dir": dir,
     'csrf_token': csrf_token
 }
-
-

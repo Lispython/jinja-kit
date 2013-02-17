@@ -12,9 +12,6 @@ Test for jinja_kit
 """
 
 import unittest
-import os.path
-
-from test_settings import TEMPLATES_DIRS
 
 class BaseTestCase(unittest.TestCase):
     pass
