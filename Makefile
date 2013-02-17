@@ -4,7 +4,7 @@ test:
 	python setup.py test
 
 travis:
-	python setup.py nosetests --tests tests.py
+	python setup.py nosetests --tests tests/runtests.py
 
 coverage:
 	python setup.py nosetests  --with-coverage --cover-package=jinja_kit --cover-html --cover-html-dir=coverage_out coverage
