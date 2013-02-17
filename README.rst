@@ -23,9 +23,9 @@ DJANGO USAGE
 ------------
 
 
-Added `jinja_kit.contrib.django` to your `INSTALLED_APPS`:
+Added ``jinja_kit.contrib.django`` to your ``INSTALLED_APPS``:
 
-.. code_block::
+.. code-block:: python
 
    INSTALLED_APPS += 'jinja_kit.contrib.django',
 
@@ -36,6 +36,7 @@ Added `jinja_kit.contrib.django` to your `INSTALLED_APPS`:
    JINJA_GLOBALS = [
    "jinja_kit.contrib.django.globals",
    ]
+
 
 CONTRIBUTE
 ----------
