@@ -92,7 +92,7 @@ install_requires = [
 setup(
     name="jinja_kit",
     version=VERSION,
-    description="jinja2 extensions",
+    description="Collection of utilities and extenstion for jinja2",
     long_description=readme_content,
     author="Alex Lispython",
     author_email="alex@obout.ru",
