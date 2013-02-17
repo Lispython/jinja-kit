@@ -3,8 +3,8 @@ Welcome to jinja-kit's documentation!
 
 Collestion of utilities and extensions for jinja2.
 
-.. image:: https://secure.travis-ci.org/lispython/jinja-kit.png
-	   :target: https://secure.travis-ci.org/lispython/jinja-kit
+.. image:: https://secure.travis-ci.org/Lispython/jinja-kit.png
+	   :target: https://secure.travis-ci.org/Lispython/jinja-kit
 
 
 INSTALLATION
