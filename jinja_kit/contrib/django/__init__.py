@@ -5,12 +5,14 @@ from __future__ import absolute_import
 
 
 from jinja_kit import Kit
-
-from jinja2 import Environment, FileSystemLoader, TemplateNotFound
-from jinja2.utils import import_string
+import gettext
+from django.utils import translation
 from django.conf import settings
 from django.http import HttpResponse
 from django.template.context import get_standard_processors
+
+from jinja2 import Environment, FileSystemLoader
+from jinja2.utils import import_string
 
 class DjangoKit(Kit):
     """Magic wrapper for jinja environment for django
@@ -36,6 +38,12 @@ class DjangoKit(Kit):
 
         for name, f in self.load_globals(self.globals).iteritems():
             self.add_global(f, name)
+
+        if getattr(settings, 'USE_I18N'):
+            try:
+                self.env.install_gettext_translations(translation)
+            except Exception:
+                self.env.install_null_translations()
 
     def get_standard_processors(self):
         """Get django standart processors
