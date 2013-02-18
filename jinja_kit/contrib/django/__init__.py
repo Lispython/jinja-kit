@@ -23,19 +23,18 @@ class DjangoKit(Kit):
         self.loader = import_string(getattr(settings, 'TEMPLATE_LOADER',
                                             'jinja2.FileSystemLoader'))
 
-
         self.env = Environment(loader=self.loader(self.search_path),
-                               auto_reload=getattr(settings, 'JINJA_AUTO_RELOAD', False),
-                               cache_size=getattr(settings, 'JINJA_CHACHE_SIZE', 50),
-                               extensions=getattr(settings, 'JINJA_EXTENSIONS', ()))
-        self.filters = getattr(settings, 'JINJA_FILTERS', [])
-        self.globals = getattr(settings, 'JINJA_GLOBALS', [])
+                               auto_reload=getattr(settings, 'JINJA2_AUTO_RELOAD', False),
+                               cache_size=getattr(settings, 'JINJA2_CHACHE_SIZE', 50),
+                               extensions=getattr(settings, 'JINJA2_EXTENSIONS', ()))
+        self.filters = getattr(settings, 'JINJA2_FILTERS', [])
+        self.globals = getattr(settings, 'JINJA2_GLOBALS', [])
 
         # Not good :-(
-        for name, f in self.load_filters(self.filters):
+        for name, f in self.load_filters(self.filters).iteritems():
             self.add_filter(f, name)
 
-        for name, f in self.load_globals(self.globals):
+        for name, f in self.load_globals(self.globals).iteritems():
             self.add_global(f, name)
 
     def get_standard_processors(self):

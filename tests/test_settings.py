@@ -36,8 +36,24 @@ INSTALLED_APPS = [
     'jinja_kit.contrib.django'
     ]
 
-JINJA_FILTERS = []
-JINJA_GLOBALS = []
+JINJA2_EXTENSIONS = (
+    'jinja2.ext.do',
+    'jinja2.ext.i18n',
+    'jinja_kit.contrib.django.ext.url',
+    'jinja_kit.contrib.django.ext.media',
+    'jinja_kit.contrib.django.ext.static',
+    'jinja_kit.contrib.django.ext.with_',
+    'jinja_kit.contrib.django.ext.spaceless'
+)
+
+JINJA2_FILTERS = (
+    'jinja_kit.contrib.django.filters',
+)
+
+JINJA2_GLOBALS = (
+    'jinja_kit.contrib.django.globals',
+)
+
 
 ROOT_URLCONF='urls',
 DEBUG=True,

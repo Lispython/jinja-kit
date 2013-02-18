@@ -29,7 +29,7 @@ except Exception, e:
     print(e)
     readme_content = __doc__
 
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 
 def run_tests():
     from tests.run_tests import suite
@@ -46,6 +46,7 @@ is_py3 = (py_ver[0] == 3)
 tests_require = [
     'nose',
     'unittest2',
+    'html5lib',
     'django==1.4']
 
 install_requires = [
