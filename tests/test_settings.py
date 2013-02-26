@@ -54,12 +54,17 @@ JINJA2_GLOBALS = (
     'jinja_kit.contrib.django.globals',
 )
 
+USE_I18N = True
 
-ROOT_URLCONF='urls',
-DEBUG=True,
+ROOT_URLCONF = 'urls',
+DEBUG = True,
 DATE_INPUT_FORMATS=('%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', '%b %d %Y',
                     '%b %d, %Y', '%d %b %Y', '%d %b, %Y', '%B %d %Y',
                     '%B %d, %Y', '%d %B %Y', '%d %B, %Y'),
 SITE_ID=1
 
 TEMPLATE_DIRS = [TEMPLATES_DIR]
+
+LOCALE_PATHS = (
+    os.path.join(os.path.join(os.path.dirname(__file__)), 'locale'),
+)

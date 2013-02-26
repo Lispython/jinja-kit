@@ -24,8 +24,8 @@ if not settings.configured:
                                if (k.isupper() and not k.startswith('_'))]))
 
 
-from .core import CoreTestCase
-from .django_test import DjangoTestCase
+from core import CoreTestCase
+from django_test import DjangoTestCase
 
 
 def suite():

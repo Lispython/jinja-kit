@@ -20,6 +20,7 @@ from django.http import HttpResponseNotFound, HttpResponseServerError
 from jinja_kit.contrib.django import DjangoKit as Kit
 from jinja_kit.contrib.django.defaults import (
     page_not_found, server_error)
+from jinja_kit.contrib.django.response import TemplateResponse
 
 
 class DjangoTestCase(unittest.TestCase):
@@ -67,4 +68,24 @@ class DjangoTestCase(unittest.TestCase):
         response = server_error(request)
         self.assertTrue(isinstance(response, HttpResponseServerError))
         self.assertEquals(response.content, "500")
+
+    def test_translations(self):
+        request = self.factory.get('/customer/details')
+
+        kit = Kit(settings)
+
+
+        self.assertEquals(kit.render_to_string("translate.html", {},
+                                               request), "Hello world")
+
+    def test_template_response_mixin(self):
+
+        request = self.factory.get('/customer/defails')
+
+        response = TemplateResponse(request, "base.html", {
+            "myvar": "hello world"}, status=400)
+        self.assertEquals(response.status_code, 400)
+        self.assertEquals(response.template_name, "base.html")
+        response.render()
+        self.assertEquals(response.content, "<h1>hello world</h1>\n")
 

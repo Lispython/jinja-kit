@@ -11,11 +11,9 @@ Test for jinja_kit
 :github: http://github.com/Lispython/jinja-kit
 """
 
-
 from jinja_kit import Kit
 
-from .base import BaseTestCase
-
+from base import BaseTestCase
 from test_settings import TEMPLATES_DIR
 
 class CoreTestCase(BaseTestCase):
