@@ -135,9 +135,11 @@ class Kit(object):
         """
         context = dict(context or {})
         context['processor_arg'] = processor_arg
-        for processor in chain(self.get_standard_processors(),
+        standard_processors = self.get_standard_processors()
+        for processor in chain(standard_processors if processor_arg else (),
                                processors or ()):
-            context.update(processor(processor_arg))
+            if processor_arg:
+                context.update(processor(processor_arg))
         return self.select_template(template_name).render(context)
 
     def get_standard_processors(self):
