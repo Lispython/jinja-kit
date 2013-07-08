@@ -136,7 +136,7 @@ class Kit(object):
         context = dict(context or {})
         context['processor_arg'] = processor_arg
         standard_processors = self.get_standard_processors()
-        for processor in chain(standard_processors if processor_arg else (),
+        for processor in chain(standard_processors,
                                processors or ()):
             if processor_arg:
                 context.update(processor(processor_arg))
