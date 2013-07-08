@@ -138,8 +138,10 @@ class Kit(object):
         standard_processors = self.get_standard_processors()
         for processor in chain(standard_processors,
                                processors or ()):
-            if processor_arg:
+            try:
                 context.update(processor(processor_arg))
+            except Exception, e:
+                print(e)
         return self.select_template(template_name).render(context)
 
     def get_standard_processors(self):
