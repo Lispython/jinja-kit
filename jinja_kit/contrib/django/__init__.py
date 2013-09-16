@@ -2,17 +2,18 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
-
+import gettext
 
 from jinja_kit import Kit
-import gettext
+
 from django.utils import translation
-from django.conf import settings
+from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse
 from django.template.context import get_standard_processors
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.utils import import_string
+
 
 class DjangoKit(Kit):
     """Magic wrapper for jinja environment for django
@@ -69,4 +70,9 @@ class DjangoKit(Kit):
                               mimetype=mimetype)
 
 
-jinja_kit_django = DjangoKit(settings)
+def configure_django_kit():
+    from django.conf import settings
+
+    return DjangoKit(settings)
+
+jinja_kit_django = SimpleLazyObject(configure_django_kit)
