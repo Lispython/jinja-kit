@@ -14,7 +14,7 @@ Collection of utilities and extensions for jinja2.
 __all__ = 'get_version', 'Kit'
 __author__ = "Alexandr Lispython (alex@obout.ru)"
 __license__ = "BSD, see LICENSE for more details"
-__build__ = 0x000001
+__build__ = 0x000013
 __maintainer__ = "Alexandr Lispython"
 
 try:
@@ -36,4 +36,3 @@ assert Kit
 
 def get_version():
     return __version__
-
