@@ -17,8 +17,9 @@ class JinjaTemplateResponse(TemplateResponse):
         self.processors = []
 
         super(JinjaTemplateResponse, self).__init__(
-            request, template, context, mimetype,
-            status, content_type, current_app, **kwargs)
+            request=request, template=template, context=context,
+            content_type=content_type, status=status, mimetype = mimetype,
+            current_app=current_app)
 
 
     def resolve_template(self, template):
