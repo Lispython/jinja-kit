@@ -23,7 +23,7 @@ version := $(shell sh -c "grep -oP 'VERSION = \"\K[0-9\.]*?(?=\")' ./setup.py")
 
 release: clean-pyc
 	git tag -f v$(version) && git push --tags
-	python setup.py sdist bdist_wininst upload
+	python setup.py sdist upload
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +

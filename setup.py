@@ -29,7 +29,7 @@ except Exception, e:
     print(e)
     readme_content = __doc__
 
-VERSION = "0.0.13"
+VERSION = "0.0.14"
 
 def run_tests():
     from tests.run_tests import suite

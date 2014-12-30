@@ -25,11 +25,16 @@ class DjangoKit(Kit):
         self.search_path = getattr(settings, 'TEMPLATE_DIRS', list())
         self.loader = import_string(getattr(settings, 'TEMPLATE_LOADER',
                                             'jinja2.FileSystemLoader'))
+        if getattr(settings, "JINJA2_BYTECODE_CACHE", False):
+            self.bytecode_cache = import_string(getattr(settings, 'JINJA2_BYTECODE_CACHE'))
+        else:
+            self.bytecode_cache = None
 
         self.env = Environment(loader=self.loader(self.search_path),
                                auto_reload=getattr(settings, 'JINJA2_AUTO_RELOAD', False),
                                cache_size=getattr(settings, 'JINJA2_CHACHE_SIZE', 50),
-                               extensions=getattr(settings, 'JINJA2_EXTENSIONS', ()))
+                               extensions=getattr(settings, 'JINJA2_EXTENSIONS', ()),
+                               bytecode_cache=self.bytecode_cache)
         self.filters = getattr(settings, 'JINJA2_FILTERS', [])
         self.globals = getattr(settings, 'JINJA2_GLOBALS', [])
 
