@@ -20,6 +20,7 @@ except ImportError:
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.utils import import_string
+from jinja2.environment import Template
 
 from jinja_kit.exceptions import TemplateNotFound
 
@@ -119,8 +120,9 @@ class Kit(object):
                                              global_functions=globals())
                 except TemplateNotFound:
                     continue
-        elif isinstance(templates, (str, unicode)):
+        elif isinstance(templates, (str, unicode, Template)):
             return self.get_template(templates, globals())
+
 
         raise TemplateNotFound
 
@@ -133,16 +135,28 @@ class Kit(object):
         :param processors:
         :param proccessor_arg:
         """
+        created_context = self.get_context(context=context, processors=processors,
+                                           processor_arg=processor_arg)
+        return self.select_template(template_name).render(created_context)
+
+    def get_standard_processors(self):
+        return ()
+
+    def get_context(self, context=None, processors=None, processor_arg=None):
         context = dict(context or {})
         context['processor_arg'] = processor_arg
         standard_processors = self.get_standard_processors()
-        for processor in chain(standard_processors,
-                               processors or ()):
+
+        for processor in chain(standard_processors, processors or ()):
             try:
                 context.update(processor(processor_arg))
             except Exception, e:
                 print(e)
-        return self.select_template(template_name).render(context)
 
-    def get_standard_processors(self):
-        return ()
+        return context
+
+
+    def from_source(self, source, context=None, processors=None, processor_arg=None):
+        created_context = self.get_context(context=context, processors=processors,
+                                           processor_arg=processor_arg)
+        return self.env.from_string(source).render(created_context)
