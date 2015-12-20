@@ -9,7 +9,6 @@ from jinja_kit import Kit
 from django.utils import translation
 from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse
-from django.template.context import get_standard_processors
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.utils import import_string
@@ -54,7 +53,11 @@ class DjangoKit(Kit):
     def get_standard_processors(self):
         """Get django standart processors
         """
-        return get_standard_processors()
+        try:
+            from django.template.context import get_standard_processors
+            return get_standard_processors()
+        except Exception:
+            return []
 
     def render_to_string(self, template_name, context=None, request=None,
                          processors=None):
