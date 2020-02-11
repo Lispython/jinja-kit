@@ -47,7 +47,7 @@ tests_require = [
     'nose',
     'unittest2',
     'html5lib',
-    'django==1.4.4']
+    'django==1.11.28']
 
 install_requires = [
     "Jinja2==2.6"]
