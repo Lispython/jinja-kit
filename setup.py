@@ -50,7 +50,7 @@ tests_require = [
     'django==1.4.4']
 
 install_requires = [
-    "Jinja2==2.6"]
+    "Jinja2==2.11.3"]
 
 
 setup(
